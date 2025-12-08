@@ -2,7 +2,6 @@ package br.edu.iftm.charles.sistemasorveteria.bo;
 
 import br.edu.iftm.charles.sistemasorveteria.dao.FuncionarioDAO;
 import br.edu.iftm.charles.sistemasorveteria.model.Funcionario;
-import br.edu.iftm.charles.sistemasorveteria.model.Venda;
 import java.util.List;
 
 public class FuncionarioBO {
@@ -15,7 +14,8 @@ public class FuncionarioBO {
     
     public boolean salvar(Funcionario f) {
         if (validar(f)) {
-            if (dao.buscaPorCpf(f.getCpf()) != null) {
+            // Verifica duplicidade de CPF
+            if (dao.buscarPorCpf(f.getCpf()) != null) {
                 System.out.println("ERRO: CPF já cadastrado para outro funcionário.");
                 return false;
             }
@@ -25,33 +25,18 @@ public class FuncionarioBO {
         return false;
     }
     
-    public boolean atualizar(Funcionario f) {
-        if (validar(f)) {
-            dao.atualizar(f);
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean excluir(Funcionario f) {
-        if (f == null || f.getId_funcionario() <= 0) {
-            System.out.println("ERRO: Selecione um funcionário.");
-            return false;
-        }
-        
-        List<Venda> vendas = dao.listarVendasFuncionario(f.getId_funcionario());
-        if (!vendas.isEmpty()) {
-            System.out.println("ERRO: Não é possível excluir: Funcionário possui vendas registradas.");
-            return false;
-        }
-        
-        dao.excluir(f.getId_funcionario());
-        return true;
-    }
-    
     public List<Funcionario> listarTodos() {
         return dao.listarTodos();
     }
+    
+    public Funcionario buscarPorCpf(String cpf) {
+        return dao.buscarPorCpf(cpf);
+    }
+    
+    public Funcionario buscarPorId(int id) {
+        return dao.buscarPorId(id);
+    }
+    
     
     private boolean validar(Funcionario f) {
         if (f.getNome() == null || f.getNome().trim().isEmpty()) {

@@ -1,12 +1,8 @@
 package br.edu.iftm.charles.sistemasorveteria.model;
 
-/**
- *
- * @author charl
- */
 public class Categoria {
     private int id_categoria;
-    private String nome;
+    private String nome; // No banco: nome_categoria
 
     public Categoria() {
     }
@@ -30,5 +26,10 @@ public class Categoria {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return this.nome; // Facilita a exibição em listas ou combobox
     }
 }

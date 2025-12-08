@@ -1,6 +1,7 @@
 package br.edu.iftm.charles.sistemasorveteria.bo;
 
 import br.edu.iftm.charles.sistemasorveteria.dao.VendaDAO;
+import br.edu.iftm.charles.sistemasorveteria.model.Item_Venda;
 import br.edu.iftm.charles.sistemasorveteria.model.Venda;
 import java.util.List;
 
@@ -14,6 +15,16 @@ public class VendaBO {
     
     public boolean salvar(Venda venda) {
         if (validar(venda)) {
+            // Regra de Negócio: Recalcular o total antes de salvar
+            // Isso evita inconsistências se o front-end mandar um valor errado
+            double totalCalculado = 0.0;
+            for (Item_Venda item : venda.getItens()) {
+                double subtotalItem = item.getQuantidade() * item.getPrecoUnitario();
+                item.setSubtotal(subtotalItem);
+                totalCalculado += subtotalItem;
+            }
+            venda.setTotal(totalCalculado);
+            
             dao.salvar(venda);
             return true;
         }
@@ -43,10 +54,6 @@ public class VendaBO {
         }
         if (v.getItens() == null || v.getItens().isEmpty()) {
             System.out.println("ERRO: A venda deve conter pelo menos um item.");
-            return false;
-        }
-        if (v.getTotal() <= 0) {
-            System.out.println("ERRO: O valor total da venda deve ser maior que zero.");
             return false;
         }
         return true;

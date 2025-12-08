@@ -1,30 +1,18 @@
 package br.edu.iftm.charles.sistemasorveteria.model;
 
-/**
- *
- * @author charl
- */
 public class Produto_Ingrediente {
-    private double quantidade_usada;
-    
+    // Tabela de ligação: Receita
     private Produto produto;
     private Ingrediente ingrediente;
+    private double quantidadeUsada; // No banco: quantidade_usada
 
     public Produto_Ingrediente() {
     }
 
-    public Produto_Ingrediente(double quantidade_usada, Produto produto, Ingrediente ingrediente) {
-        this.quantidade_usada = quantidade_usada;
+    public Produto_Ingrediente(Produto produto, Ingrediente ingrediente, double quantidadeUsada) {
         this.produto = produto;
         this.ingrediente = ingrediente;
-    }
-
-    public double getQuantidade_usada() {
-        return quantidade_usada;
-    }
-
-    public void setQuantidade_usada(double quantidade_usada) {
-        this.quantidade_usada = quantidade_usada;
+        this.quantidadeUsada = quantidadeUsada;
     }
 
     public Produto getProduto() {
@@ -41,5 +29,13 @@ public class Produto_Ingrediente {
 
     public void setIngrediente(Ingrediente ingrediente) {
         this.ingrediente = ingrediente;
+    }
+
+    public double getQuantidadeUsada() {
+        return quantidadeUsada;
+    }
+
+    public void setQuantidadeUsada(double quantidadeUsada) {
+        this.quantidadeUsada = quantidadeUsada;
     }
 }

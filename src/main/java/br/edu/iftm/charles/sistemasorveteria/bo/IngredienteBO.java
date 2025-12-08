@@ -20,23 +20,6 @@ public class IngredienteBO {
         return false;
     }
     
-    public boolean atualizar(Ingrediente ing) {
-        if (validar(ing)) {
-            dao.alterar(ing);
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean excluir(Ingrediente ing) {
-        if (ing == null || ing.getId_ingrediente() <= 0) {
-            System.out.println("ERRO: Selecione um ingrediente.");
-            return false;
-        }
-        dao.excluir(ing.getId_ingrediente());
-        return true;
-    }
-    
     public List<Ingrediente> listarTodos() {
         return dao.listarTodos();
     }

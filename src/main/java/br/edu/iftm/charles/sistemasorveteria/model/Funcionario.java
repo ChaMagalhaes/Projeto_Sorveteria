@@ -1,9 +1,5 @@
 package br.edu.iftm.charles.sistemasorveteria.model;
 
-/**
- *
- * @author charl
- */
 public class Funcionario {
     private int id_funcionario;
     private String nome;

@@ -4,43 +4,29 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author charl
- */
 public class Venda {
-
     private int id_venda;
     private LocalDateTime data_venda;
     private String forma_pagamento;
     private String status;
     private double total;
-    private List<Item_Venda> itens = new ArrayList();
-
-    private Funcionario funcionario;
+    
+    // Relacionamentos
     private Cliente cliente;
+    private Funcionario funcionario;
+    private List<Item_Venda> itens = new ArrayList<>();
 
     public Venda() {
-        this.itens = new ArrayList<>();
     }
 
-    public Venda(int id_venda, LocalDateTime data_venda, String forma_pagamento, String status, double total, Funcionario funcionario, Cliente cliente) {
+    public Venda(int id_venda, LocalDateTime data_venda, String forma_pagamento, String status, double total, Cliente cliente, Funcionario funcionario) {
         this.id_venda = id_venda;
         this.data_venda = data_venda;
         this.forma_pagamento = forma_pagamento;
         this.status = status;
         this.total = total;
-        this.funcionario = funcionario;
         this.cliente = cliente;
-        this.itens = new ArrayList<>();
-    }
-
-    public List<Item_Venda> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<Item_Venda> itens) {
-        this.itens = itens;
+        this.funcionario = funcionario;
     }
 
     public int getId_venda() {
@@ -83,6 +69,14 @@ public class Venda {
         this.total = total;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public Funcionario getFuncionario() {
         return funcionario;
     }
@@ -91,11 +85,16 @@ public class Venda {
         this.funcionario = funcionario;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public List<Item_Venda> getItens() {
+        return itens;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setItens(List<Item_Venda> itens) {
+        this.itens = itens;
+    }
+    
+    public void adicionarItem(Item_Venda item) {
+        this.itens.add(item);
+        item.setVenda(this); // Garante a referência de volta
     }
 }

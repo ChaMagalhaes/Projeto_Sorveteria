@@ -3,17 +3,10 @@ package br.edu.iftm.charles.sistemasorveteria.dao;
 import br.edu.iftm.charles.sistemasorveteria.model.Categoria;
 import br.edu.iftm.charles.sistemasorveteria.model.Produto;
 import br.edu.iftm.charles.sistemasorveteria.util.ConexaoBD;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author charl
- */
 public class ProdutoDAO {
     private final Connection conn;
     
@@ -21,14 +14,15 @@ public class ProdutoDAO {
         conn = new ConexaoBD().conectar();
     }
     
-    public void salvar(Produto produto){
+    public void salvar(Produto p) {
         String sql = "INSERT INTO produto (id_categoria, nome, preco, descricao) VALUES (?, ?, ?, ?)";
         
         try(PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, produto.getCategoria().getId_categoria());
-            stmt.setString(2, produto.getNome());
-            stmt.setDouble(3, produto.getPreco());
-            stmt.setString(4, produto.getDescricao());
+            stmt.setInt(1, p.getCategoria().getId_categoria());
+            stmt.setString(2, p.getNome());
+            stmt.setDouble(3, p.getPreco());
+            stmt.setString(4, p.getDescricao());
+            
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -37,6 +31,7 @@ public class ProdutoDAO {
     
     public List<Produto> listarTodos() {
         List<Produto> lista = new ArrayList<>();
+        // Usando a View criada no script para pegar o nome da categoria junto
         String sql = "SELECT * FROM vw_produto_e_categoria";
         
         try (PreparedStatement stmt = conn.prepareStatement(sql);
@@ -62,43 +57,15 @@ public class ProdutoDAO {
         return lista;
     }
     
-    public void atualizar(Produto produto) {
-        String sql = "UPDATE produto SET id_categoria = ?, nome = ?, preco = ?, descricao = ? WHERE id_produto = ?";
-        
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, produto.getCategoria().getId_categoria());
-            stmt.setString(2, produto.getNome());
-            stmt.setDouble(3, produto.getPreco());
-            stmt.setString(4, produto.getDescricao());
-            stmt.setInt(5, produto.getId_produto());
-            
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void excluir(int id) {
-        String sql = "DELETE FROM produto WHERE id_produto = ?";
-        
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            stmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
     public Produto buscarPorId(int id) {
         String sql = "SELECT * FROM produto WHERE id_produto = ?";
-        Produto p = null;
         
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    p = new Produto();
+                    Produto p = new Produto();
                     p.setId_produto(rs.getInt("id_produto"));
                     p.setNome(rs.getString("nome"));
                     p.setPreco(rs.getDouble("preco"));
@@ -107,11 +74,13 @@ public class ProdutoDAO {
                     Categoria c = new Categoria();
                     c.setId_categoria(rs.getInt("id_categoria"));
                     p.setCategoria(c);
+                    
+                    return p;
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return p;
+        return null;
     }
 }

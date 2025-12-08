@@ -1,16 +1,12 @@
 package br.edu.iftm.charles.sistemasorveteria.model;
 
-/**
- *
- * @author charl
- */
 public class Produto {
     private int id_produto;
     private String nome;
     private double preco;
     private String descricao;
     
-    private Categoria categoria;
+    private Categoria categoria; // Relacionamento
 
     public Produto() {
     }

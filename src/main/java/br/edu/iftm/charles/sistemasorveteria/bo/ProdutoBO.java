@@ -20,25 +20,12 @@ public class ProdutoBO {
         return false;
     }
     
-    public boolean atualizar(Produto p) {
-        if (validar(p)) {
-            dao.atualizar(p);
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean excluir(Produto p) {
-        if (p == null || p.getId_produto() <= 0) {
-            System.out.println("ERRO: Selecione um produto.");
-            return false;
-        }
-        dao.excluir(p.getId_produto());
-        return true;
-    }
-    
     public List<Produto> listarTodos() {
         return dao.listarTodos();
+    }
+    
+    public Produto buscarPorId(int id) {
+        return dao.buscarPorId(id);
     }
     
     private boolean validar(Produto p) {
@@ -51,7 +38,7 @@ public class ProdutoBO {
             return false;
         }
         if (p.getCategoria() == null || p.getCategoria().getId_categoria() <= 0) {
-            System.out.println("ERRO: Selecione uma categoria para o produto.");
+            System.out.println("ERRO: Selecione uma categoria válida para o produto.");
             return false;
         }
         return true;

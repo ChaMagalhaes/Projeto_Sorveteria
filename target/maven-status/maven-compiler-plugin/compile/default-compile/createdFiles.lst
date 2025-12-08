@@ -1,3 +1,4 @@
+br\edu\iftm\charles\sistemasorveteria\view\MenuPrincipal.class
 br\edu\iftm\charles\sistemasorveteria\model\Item_Venda.class
 br\edu\iftm\charles\sistemasorveteria\dao\FuncionarioDAO.class
 br\edu\iftm\charles\sistemasorveteria\model\Funcionario.class
@@ -6,11 +7,17 @@ br\edu\iftm\charles\sistemasorveteria\model\Categoria.class
 br\edu\iftm\charles\sistemasorveteria\util\ConexaoBD.class
 br\edu\iftm\charles\sistemasorveteria\dao\CategoriaDAO.class
 br\edu\iftm\charles\sistemasorveteria\SistemaSorveteria.class
+br\edu\iftm\charles\sistemasorveteria\bo\FuncionarioBO.class
 br\edu\iftm\charles\sistemasorveteria\model\Produto_Ingrediente.class
+br\edu\iftm\charles\sistemasorveteria\bo\ProdutoBO.class
+br\edu\iftm\charles\sistemasorveteria\bo\ClienteBO.class
 br\edu\iftm\charles\sistemasorveteria\dao\VendaDAO.class
+br\edu\iftm\charles\sistemasorveteria\bo\IngredienteBO.class
+br\edu\iftm\charles\sistemasorveteria\bo\CategoriaBO.class
 br\edu\iftm\charles\sistemasorveteria\dao\IngredienteDAO.class
 br\edu\iftm\charles\sistemasorveteria\model\Venda.class
 br\edu\iftm\charles\sistemasorveteria\model\Ingrediente.class
 br\edu\iftm\charles\sistemasorveteria\model\Produto.class
 br\edu\iftm\charles\sistemasorveteria\dao\ClienteDAO.class
 br\edu\iftm\charles\sistemasorveteria\model\Cliente.class
+br\edu\iftm\charles\sistemasorveteria\bo\VendaBO.class

@@ -1,16 +1,12 @@
 package br.edu.iftm.charles.sistemasorveteria.model;
 
-/**
- *
- * @author charl
- */
 public class Cliente {
     private int id_cliente;
     private String nome;
     private String telefone;
     private String email;
     private String endereco;
-    private String documento;
+    private String documento; // CPF ou CNPJ
 
     public Cliente() {
     }

@@ -1,60 +1,23 @@
 package br.edu.iftm.charles.sistemasorveteria.model;
 
-/**
- *
- * @author charl
- */
 public class Item_Venda {
-    
-    private int id;
-    private int quantidade;
-    private double valorUnitario; // Alterado de preco_unitario para valorUnitario
-    private double subtotal;
-    
+    // Chave composta no banco (id_venda, id_produto), aqui usamos referências aos objetos
     private Venda venda;
     private Produto produto;
+    
+    private int quantidade;
+    private double precoUnitario; // No banco: preco_unitario
+    private double subtotal;
 
     public Item_Venda() {
     }
 
-    public Item_Venda(int quantidade, double valorUnitario, Venda venda, Produto produto) {
-        this.quantidade = quantidade;
-        this.valorUnitario = valorUnitario;
+    public Item_Venda(Venda venda, Produto produto, int quantidade, double precoUnitario) {
         this.venda = venda;
         this.produto = produto;
-        this.subtotal = quantidade * valorUnitario;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
-    }
-
-    public double getValorUnitario() {
-        return valorUnitario;
-    }
-
-    public void setValorUnitario(double valorUnitario) {
-        this.valorUnitario = valorUnitario;
-    }
-
-    public double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
+        this.precoUnitario = precoUnitario;
+        this.subtotal = quantidade * precoUnitario;
     }
 
     public Venda getVenda() {
@@ -71,5 +34,29 @@ public class Item_Venda {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public double getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    public void setPrecoUnitario(double precoUnitario) {
+        this.precoUnitario = precoUnitario;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
     }
 }
